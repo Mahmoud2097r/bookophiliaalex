@@ -1,0 +1,209 @@
+<% layout('layouts/boilerplate') -%>
+
+
+<div id="events" class="container mt-5">
+    <ul class="nav nav-tabs" id="eventsTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="up-coming" data-toggle="tab" href="#coming" role="tab" aria-controls="coming" aria-selected="true">Up-coming Events</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="past-events" data-toggle="tab" href="#past" role="tab" aria-controls="past" aria-selected="false">Past Events</a>
+        </li>
+        <% if(currentUser && currentUser.isAdmin) { %>
+            <li class="nav-item" role="presentation">
+                <!-- Button trigger modal -->
+                <a class="nav-link" data-toggle="modal" href="#eventModal">
+                    Add New Event
+                </a>
+            </li>
+        <% } %> 
+    </ul>
+    <div class="tab-content" id="eventsTabContent" style="background-color: #fff;">
+        <div class="tab-pane fade show active" id="coming" role="tabpanel" aria-labelledby="up-coming">
+            <div class="container mt-5">
+                <% for (const event of events) { %> 
+                    <% if (!event.expire) { %>
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                <img src="<%= event.image.thumbnail %> " alt="..." style="height: 100%; width: 100%;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= event.eventTitle %> </h5>
+                                    <h5 class="subtitle"><a href="<%= event.eventLink %> "><%= event.eventLink %></a> </h5>
+                                    <p class="card-text"><%= event.description %> </p>
+                                    <p class="card-text"><b class="text-muted">(<%= moment(event.eventDate).format('MMM Do YY')%>, <%= event.eventTime %>:00)</b></p>
+                                    <!-- Button trigger modal -->
+                                    <% if(currentUser && currentUser.isAdmin) { %>
+                                        <button class="btn btn-warning1" data-toggle="modal" data-target="#editEventModal">
+                                            Edit <%= event.eventTitle %> 
+                                        </button>
+                                        <button class="btn btn-danger1" data-toggle="modal" data-target="#deleteEventModal">
+                                            Delete <%= event.eventTitle %> 
+                                        </button>
+                                    <% } %> 
+                                </div>
+                            </div>
+                            </div>
+                        </div> 
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteEventModal" tabindex="-1" aria-labelledby="deleteEventModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteEventModalLabel">New Event</h5>
+                                        <button type="button" class="btn" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/events/<%= event.id %>?_method=DELETE " method="POST" style="display: inline;">
+                                            <button class="btn btn-danger1 m-3">Delete <%= event.eventTitle %>?</button>
+                                            <div class="modal-footer">
+                                                <button class="btn close" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editEventModalLabel">Edit</h5>
+                                        <button type="button" class="btn" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/events/<%= event.id %>?_method=PUT" method="POST" class="validationForm" enctype="multipart/form-data" novalidate>
+                                            <div class="form-group">
+                                                <label for="eventTitle"><b><em>Title:</em></b></label>
+                                                <input type="text" id="eventTitle" class="form-control" name="event[eventTitle]" placeholder="Title..." value="<%= event.eventTitle %> " required>
+                                                <div class="invalid-feedback">
+                                                    Please fill the field above.
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eventLink"><b><em>Link:<span class="text-danger">*</span></em></b></label>
+                                                <input type="text" id="eventLink" class="form-control" name="event[eventLink]" placeholder="Link..." value="<%= event.eventLink %> " required>
+                                                <div class="invalid-feedback">
+                                                    Please fill the field above.
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="description"><b><em>Description:<span class="text-danger">*</span></em></b></label>
+                                                <textarea type="text" rows="3" id="description" class="form-control" name="event[description]" placeholder="description..." required><%= event.description %> </textarea>
+                                                <div class="invalid-feedback">
+                                                    Please fill the field above.
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eventDate"><b><em>Event Date<span class="text-danger">*</span></em></b></label>
+                                                <input class="form-control" type="date" id="eventDate" name="event[eventDate]"  value="<%= event.eventDate %> " required>
+                                                <div class="invalid-feedback">
+                                                    Please fill the field above.
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <select class="custom-select" id="selectEventTime" aria-label="selectEventTime" name="event[eventTime]" required>
+                                                        <option selected>Choose...</option>
+                                                        <option value="1">1:00</option>
+                                                        <option value="2">2:00</option>
+                                                        <option value="3">3:00</option>
+                                                        <option value="4">4:00</option>
+                                                        <option value="5">5:00</option>
+                                                        <option value="6">6:00</option>
+                                                        <option value="7">7:00</option>
+                                                        <option value="8">8:00</option>
+                                                        <option value="9">9:00</option>
+                                                        <option value="10">10:00</option>
+                                                        <option value="11">11:00</option>
+                                                        <option value="12">12:00</option>
+                                                        <option value="13">13:00</option>
+                                                        <option value="14">14:00</option>
+                                                        <option value="15">15:00</option>
+                                                        <option value="16">16:00</option>
+                                                        <option value="17">17:00</option>
+                                                        <option value="18">18:00</option>
+                                                        <option value="19">19:00</option>
+                                                        <option value="20">20:00</option>
+                                                        <option value="21">21:00</option>
+                                                        <option value="22">22:00</option>
+                                                        <option value="23">23:00</option>
+                                                        <option value="00">00:00</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input name="image" type="file" class="custom-file-input" id="eventImage"
+                                                            required>
+                                                        <label class="custom-file-label" for="eventImage"
+                                                            aria-describedby="inputGroupFileAddon02"><b><em>Choose file:<span class="text-danger">*</span></em></b></label>
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please fill the field above.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-warning1">Update</button>
+                                                <button class="btn btn-danger1" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+                <% if ( events.every(e => (e.expire === true) )) { %>
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Thanks for your attention!</h4>
+                        <p>There are no events yet. Please visit the events section later</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-events">
+            <div class="container mt-5">
+                <% for (const event of events) { %> 
+                    <% if (event.expire) { %> 
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                <img src="<%= event.image.thumbnail %> " alt="..." style="height: 100%; width: 100%;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= event.eventTitle %> </h5>
+                                    <h5 class="subtitle"><a href="<%= event.eventLink %> "><%= event.eventLink %></a> </h5>
+                                    <p class="card-text"><%= event.description %> </p>
+                                    <p class="card-text"><b class="text-muted">(<%= moment(event.eventDate).format('MMM Do YY')%>, <%= event.eventTime %>:00)</b></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div> 
+                    <% } %> 
+                <% } %>
+                <% if ( events.every(e => (e.expire === false) )) { %>
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">there are no past events yet!</h4>
+                    </div>
+                <% } %>  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ./newEvent %> 

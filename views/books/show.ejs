@@ -1,0 +1,79 @@
+<% layout('layouts/boilerplate2') -%>
+
+<a href="/books" id="backArrow">
+    <i class="fas fa-chevron-circle-left"></i>
+</a>
+
+
+<div id="showBook">
+    <% if(book.copies == 0) { %>
+        <h2 class="text-warning m-2">
+            WARNING: -->We'ev run out of this book!
+        </h2>
+    <% } %>
+
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title"><%= book.title %></h1>
+        </div>
+        <ul class="list-group list-group-flush text-muted mb-0">
+            <li class="list-group-item stars">
+                <span style="margin-right: 1rem;">RATE : </span>
+                <% for ( let i = 0; i < 5; i++) { %>
+                    <% if (i < floorRating) { %>
+                        <i class="fas fa-star text-dark"></i>
+                    <% } else if ( (book.avgRating - 1 ) > 0 && ( book.avgRating - 1 ) < 1) { %>
+                        <i class="fas fa-star-half-alt text-dark"></i>
+                    <% } else { %>
+                        <i class="far fa-star text-dark"></i>
+                    <% } %>
+                <% } %>
+                <span class="text-dark"><%= `${book.avgRating}` %></span>
+            </li>
+            <li class="list-group-item">
+                PRICE: <span class="ml-1 text-dark"><%= book.price %>EGP</span>
+                <span style="display: block;">AMOUNT:
+                    <span class="ml-0 text-dark"><%= book.copies %> </span>
+                </span>
+            </li>
+            <% if (book.pdf) { %>
+            <li class="list-group-item">
+                <span style="display: block;">PDF:
+                    <span class="ml-2 text-dark"><%= book.pdf %> </span>
+                </span>
+            </li>
+            <% } %>
+
+            <% if (book.audioBook) { %>
+                <li class="list-group-item">
+                    <span style="display: block;">Audio Book:
+                        <span class="ml-2 text-dark"><%= book.audioBook %> </span>
+                    </span>
+                </li>
+            <% } %>
+        </ul>
+        <img  src="<%= book.image.secure_url %>" class="card-img-bottom mt-0" alt="Book Cover">
+    </div>
+
+    
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-muted author"><%= book.author %></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Description:</h6>
+            <p class="card-text desc"><%= book.description %></p>
+            <% if(currentUser && currentUser.isAdmin) { %>
+                <a href="#EditBookForm" data-toggle="modal" class="card-link
+                btn btn-warning1">Edit</a>
+                <a href="#deleteBook" data-toggle="modal" class="card-link btn btn-danger1">Delete</a>
+            <% } else { %>
+                <a href="#bookBook" data-toggle="modal" class="card-link btn btn-outline-secondary">Book now</a>
+            <% } %>
+        </div>
+    </div>
+</div>
+<% include ../partials/newReview %>
+
+
+
+<% include ../partials/editAndDeleteBook %>
+</div>

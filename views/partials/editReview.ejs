@@ -1,0 +1,57 @@
+<div class="modal fade" id="editReview" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Review:</h5>
+                <button type="button" class="btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <% if(currentUser && review.author.equals(currentUser._id)) { %>
+                <div>
+                    <div class="form-group">
+                        <form action="/books/<%= book.id %>/reviews/<%= review.id %>?_method=PUT" method="POST"
+                            class="edit-review-form" class="validationForm" novalidate>
+                            <div class="form-group mt-2">
+                                <label for="body2">Comment:</label>
+                                <textarea name="review[body]" class="form-control" required><%= review.body %></textarea>
+                                <div class="invalid-feedback">
+                                    Please fill the field above.
+                                </div>
+                            </div>
+                            <fieldset class="starability-basic">
+                                <legend>Rating:</legend>
+                                <input type="radio" id="edit-rate0" class="input-no-rate" name="review[rating]"
+                                    value="0" checked aria-label="No rating." />
+                                <input type="radio" id="edit-rate1" name="review[rating]" value="1" />
+                                <label for="edit-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="edit-rate2" name="review[rating]" value="2" />
+                                <label for="edit-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="edit-rate3" name="review[rating]" value="3" />
+                                <label for="edit-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="edit-rate4" name="review[rating]" value="4" />
+                                <label for="edit-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="edit-rate5" name="review[rating]" value="5" />
+                                <label for="edit-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+
+                            
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-warning1">Update</button>
+                                </div>
+                                <button type="button" class="btn btn-danger1" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

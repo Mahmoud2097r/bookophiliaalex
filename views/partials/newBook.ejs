@@ -1,0 +1,102 @@
+<div class="modal fade" id="newBookForm" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add A Book:</h5>
+                <button type="button" class="btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/category/<%= category._id %>/books" method="POST" enctype="multipart/form-data" class="validationForm" novalidate>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="title"><b><em>Title:<span class="text-danger">*</span></em></b></label>
+                            <input id="title" name="book[title]" type="text" class="form-control" placeholder="Tilte"
+                                required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="author"><b><em>Author:<span class="text-danger">*</span></em></b></label>
+                            <input id="author" name="book[author]" type="text" class="form-control" placeholder="Author"
+                                required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description"><b><em>Description:<span class="text-danger">*</span></em></b></label>
+                            <textarea id="description" name="book[description]" class="form-control" rows="8"
+                                cols="80" required></textarea>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="label"><b><em>Label:</em></b></label>
+                            <input id="label" name="book[label]" type="text" class="form-control" placeholder="Label...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pdf"><b><em>PDF:</em></b></label>
+                            <input id="pdf" name="book[pdf]" type="text" class="form-control" placeholder="ADD A Link">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="audio"><b><em>Audio Book:</em></b></label>
+                            <input id="audio" name="book[audioBook]" type="text" class="form-control" placeholder="ADD A Link">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="copies"><b><em>Copies:<span class="text-danger">*</span></em></b></label>
+                            <input id="copies" name="book[copies]" type="number" min="1" class="form-control" value="1"
+                                placeholder="Copies" required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price"><b><em>Price:<span class="text-danger">*</span></em></b></label>
+                            <input id="price" name="book[price]" type="number" min="5" class="form-control" value="5"
+                                placeholder="Price" required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="coverImageName"><b><em>Book Cover Image <span class="text-danger">*</span></em></b></label>
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input name="image" type="file" class="custom-file-input" id="coverImageName"
+                                        required>
+                                    <label class="custom-file-label" for="coverImageName"
+                                        aria-describedby="inputGroupFileAddon02">Choose file</label>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please fill the field above.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" value="Add">
+                            </div>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

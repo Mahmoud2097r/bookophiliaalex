@@ -1,0 +1,93 @@
+<!-- Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">New Event</h5>
+                <button type="button" class="btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/events" method="POST" class="validationForm" enctype="multipart/form-data" novalidate>
+                    <div class="form-group">
+                        <label for="eventTitle"><b><em>Title:<span class="text-danger">*</span></em></b></label>
+                        <input type="text" id="eventTitle" class="form-control" name="event[eventTitle]" placeholder="Title..." required>
+                        <div class="invalid-feedback">
+                            Please fill the field above.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventLink"><b><em>Link:<span class="text-danger">*</span></em></b></label>
+                        <input type="text" id="eventLink" class="form-control" name="event[eventLink]" placeholder="Link..." required>
+                        <div class="invalid-feedback">
+                            Please fill the field above.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description"><b><em>Description:<span class="text-danger">*</span></em></b></label>
+                        <textarea type="text" rows="3" id="description" class="form-control" name="event[description]" placeholder="description..." required></textarea>
+                        <div class="invalid-feedback">
+                            Please fill the field above.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate"><b><em>Event Date<span class="text-danger">*</span></em></b></label>
+                        <input class="form-control" type="date" id="eventDate" name="event[eventDate]" required>
+                        <div class="invalid-feedback">
+                            Please fill the field above.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="custom-select" id="selectEventTime" aria-label="selectEventTime" name="event[eventTime]">
+                                <option selected>Choose...</option>
+                                <option value="1">1:00</option>
+                                <option value="2">2:00</option>
+                                <option value="3">3:00</option>
+                                <option value="4">4:00</option>
+                                <option value="5">5:00</option>
+                                <option value="6">6:00</option>
+                                <option value="7">7:00</option>
+                                <option value="8">8:00</option>
+                                <option value="9">9:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                                <option value="00">00:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input name="image" type="file" class="custom-file-input" id="eventImage"
+                                    required>
+                                <label class="custom-file-label" for="eventImage"
+                                    aria-describedby="inputGroupFileAddon02"><b><em>Choose file:<span class="text-danger">*</span></em></b></label>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success1 mr-2">Add</button>
+                        <button class="btn btn-danger1" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

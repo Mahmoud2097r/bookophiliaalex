@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mada">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amiri">
+    <link rel="stylesheet" href="/assets/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/stylesheets/css/all.css">
+    <link rel="stylesheet" href="/assets/stylesheets/css/app.css">
+    <title><%= title %></title>
+</head>
+
+<body>
+
+
+
+
+    <% include ../partials/navbar %>
+
+    <%if (error && error.length) { %>
+        <div class="container" style="margin-top:20px;">
+            <div class="bg-danger alert alert-dismissible fade show" role="alert">
+                <%= error %>
+                <button type="button" class="close closer" data-dismiss="alert" aria-label="Close">
+                    <i class="far fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    <% } %>
+    <%if (success && success.length){%>
+        <div class="container">
+            <div class="bg-success alert alert-dismissible fade show mt-4" role="alert">
+                <%= success %>
+                <button type="button" class="close closer" data-dismiss="alert" aria-label="Close">
+                    <i class="far fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    <%}%>
+
+    
+
+    <%- body -%>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>
+
+
+

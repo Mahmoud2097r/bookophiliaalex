@@ -1,0 +1,99 @@
+<nav id="mainNavbar">
+    <div class="container1">
+        <div class="brand">
+            <a href="/categories">
+                <img id="logo" src="/assets/images/Logo.png" alt="">
+            </a>
+        </div>
+
+        <form id="searcForm2" action="/books" method="GET" class="form-inline mt-3 mr-auto">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" type="search" name="search" aria-label="Search"
+                        id="searchInput" placeholder="Author, book,etc...">
+                    <div class="input-group-append">
+                        <button class="btn" type="submit" id="button-addon">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="nav-content">
+
+            <a href="/about" class="nav-link1 about">About</a>
+
+            <a href="/categories" class="nav-link1 home">Home</a>
+
+            <a href="/books" class="nav-link1 all">All</a>
+
+            <a href="/books/newbooks" class="nav-link1 new">New</a>
+
+            <a href="/events" class="nav-link1 events">Events</a>
+        </div>
+
+        <div class="icons-drop">
+            <div class="dropleft">
+                <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                </button>
+    
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% if (!currentUser) { %>
+                        <a href="#registerForm" data-toggle="modal" class="dropdown-item">Register</a>
+                        <a href="#loginForm" data-toggle="modal" class="dropdown-item">Login</a>
+                    <% } else { %>
+                        <a href="/update-info" class="dropdown-item">See Your Informaion</a>
+                        <a href="/logout" class="dropdown-item">Logout</a>
+                    <% } %>
+                </div>
+            </div>
+    
+            <p>
+                <button type="button" data-toggle="collapse" data-target="#navContentCollapse"
+                    aria-expanded="false" aria-controls="navContentCollapse">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </p>
+        </div>    
+    </div>
+
+    <div class="collapse" id="navContentCollapse">
+        <div class="card card-body border-0" style="display: flex; flex-direction: column; align-items: center;">
+            <a href="/about" class="nav-link1 about" style="text-decoration: none; color: #818181;">About</a>
+
+            <a href="/categories" class="nav-link1 home" style="text-decoration: none; color: #818181;">Home</a>
+
+            <a href="/books" class="nav-link1 all" style="text-decoration: none; color: #818181;">All</a>
+
+            <a href="/books/newbooks" class="nav-link1 new" style="text-decoration: none; color: #818181;">New</a>
+
+            <a href="/events" class="nav-link1 events" style="text-decoration: none; color: #818181;">Events</a>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="searcForm" action="/books" method="GET" class="form-inline mt-3 mr-auto">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" type="search" name="search" aria-label="Search"
+                        id="searchInput" placeholder="Author, book,etc...">
+                    <div class="input-group-append">
+                        <button class="btn" type="submit" id="button-addon">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</nav>
+
+
+
+<% include ./login %>
+<% include ./register %>

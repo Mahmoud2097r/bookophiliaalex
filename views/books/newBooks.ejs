@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="container">
+    <section class="addCat">    
+        <h1 class="text-center">NEW BOOKS</h1>
+    </section>
+</div>
+
+<section>
+    <div class="container">
+        <% include ../partials/paginateBooks %>
+    </div>
+    <div id="catCards" class="container">
+        <% books.forEach(book => { %>
+            <a href="/books/<%= book._id %>" class="card border-0">
+                <img src="<%= book.image.thumbnail %>" alt="Somthing went wrong">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><%= book.title%></h4>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+
+</section>
+
+<div class="container mt-5 mb-5">
+  <% include ../partials/paginateBooks %>
+</div>   
+

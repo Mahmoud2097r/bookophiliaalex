@@ -1,0 +1,34 @@
+<% layout('layouts/boilerplate') -%>
+
+
+<div class="container">
+    <section class="addCat">    
+        <h1 class="text-center">Categories</h1>
+        <% if(currentUser && currentUser.isAdmin) { %>
+            <% include ../partials/newCat %>
+            <a href="#newCat" data-toggle="modal" class="btn">Add New Category</a>
+        <% } %>
+    </section>
+</div>
+
+<div id="catCards" class="container">
+    <% for(const cat of categories){ %>
+        <a href="/categories/<%= cat._id %>" class="card border-0">
+            <img src="<%= cat.image.thumbnail %>" alt="category's cover" class="card-img-top">
+            <div class="card-body">
+                <h4 class="card-title text-center"><%= cat.name %></h4>
+            </div>
+        </a>
+    <% } %>
+</div>
+
+<% if(currentUser && currentUser.isAdmin) { %>
+    <% if(categories.length) { %>
+        <div class="container">
+            <section class="addCat">
+                <% include ../partials/newCat %>
+                <a href="#newCat" data-toggle="modal" class="btn">Add New Category</a>
+            </section>
+        </div>
+    <% } %>
+<% } %>

@@ -1,0 +1,53 @@
+<% layout('layouts/boilerplate') -%>
+
+
+
+<div class="container">
+    <section class="addCat">    
+        <h1 class="text-center"><%= category.name %></h1>
+    </section>
+</div>
+
+<div class="container">
+    <section class="editCat">    
+        <% if(currentUser && currentUser.isAdmin) { %>
+            <% include ../partials/newCat %>
+            <a href="#editCat" data-toggle="modal" class="btn edit">Edit <%= title %></a>
+            <a href="#deleteCat" data-toggle="modal" class="btn delete">Delete <%= title %></a>
+            <a href="#newBookForm" data-toggle="modal" class="btn edit">Add New Book</a>
+            <% include ../partials/newBook %>
+            <% include ../partials/editCat %>
+            <% include ../partials/deleteCat %>
+        <% } %>
+    </section>
+</div>
+
+
+
+
+<div id="catCards" class="container">
+    <% category.books.forEach(book => { %>
+        <a href="/books/<%= book._id %>" class="card border-0">
+            <img src="<%= book.image.thumbnail %>" alt="Somthing went wrong">
+            <div class="card-body">
+                <h4 class="card-title text-center"><%= book.title%></h4>
+            </div>
+        </a>
+    <% }) %>
+</div>
+
+
+<% if(currentUser && currentUser.isAdmin) { %>
+    <% if(category.books.length) { %>
+        <div class="container" style="margin-top: 0; margin-bottom: 2.5rem;">
+            <section class="editCat">    
+                    <% include ../partials/newCat %>
+                    <a href="#editCat" data-toggle="modal" class="btn edit">Edit <%= title %></a>
+                    <a href="#deleteCat" data-toggle="modal" class="btn delete">Delete <%= title %></a>
+                    <a href="#newBookForm" data-toggle="modal" class="btn edit" style="margin-left: 0;">Add New Book</a>
+            </section>
+        </div>
+    <% } %>
+<% } %>
+
+

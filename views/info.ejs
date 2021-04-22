@@ -1,0 +1,131 @@
+<% layout('layouts/boilerplate') -%>
+<title>User Info</title>
+
+<style>
+    .active {
+        background-color: #fff;
+    }
+</style>
+<div class="container">
+    <ul class="nav nav-tabs" id="userTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="userInfo" data-toggle="tab" href="#userInfoForm" role="tab" aria-controls="userInfo"
+                aria-selected="true">User Info</a>
+        </li>
+        <li class="nav-item" role="activity">
+            <a class="nav-link" id="activity-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="activity"
+                aria-selected="false">activity log</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="userTab">
+        <div class="tab-pane fade show active" id="userInfoForm" role="tabpanel" aria-labelledby="userInfo">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <label class="text-dark">Username:</label>
+                    <div class="card-title " id="usernameCard"> <%= user.username %></div>
+                    <label class="text-dark">Email:</label>
+                    <div class="card-title"><%= user.email %></div>
+                    <label class="text-dark">PhonNumber:</label>
+                    <div class="card-title"><%= user.phonNumber %></div>
+                    <button class="btn btn-warning1" type="button" data-toggle="collapse"
+                        data-target="#upInfoDate" aria-expanded="false" aria-controls="collapseExample">
+                        Edit
+                    </button>
+                    <% if (!user.isVerified) { %>
+                    <form action="/send-verify-email?_method=PUT" method="POST" style="display: inline;">
+                        <button class="btn btn-warning1">Verify your email address!</button>
+                    </form>
+                    <% } %>
+                </div>
+            </div>
+
+            <div>
+                <div class="modal-dialog collapse" id="upInfoDate">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Update Form:</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/update-info?_method=PUT" method="POST">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" placeholder="email@ecample.com"
+                                        value="<%= currentUser.email %>" class="form-control" autofocus>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password (required to update profile):</label>
+                                    <input type="password" id="currentPassword" name="currentPassword"
+                                        placeholder="Current password" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="new-password">New Password:</label>
+                                    <input type="password" id="new-password" name="newPassword"
+                                        placeholder="New password" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password-confirmation">Password Confirmation:</label>
+                                    <input type="password" id="password-confirmation" name="passwordConfirmation"
+                                        placeholder="Password confirmation" class="form-control">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="phonNumber">Phon Number:</label>
+                                    <input type="number" name="phonNumber" id="phonNumber" class="form-control"
+                                        placeholder="Phon Number" value="<%= currentUser.phonNumber %>">
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="btn btn-warning1" type="submit" value="Update" style="width: 100%;">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+            <% if (user.activity.length === 0) { %>
+                <p class="m-2">You don't have any activities yet. </p>
+            <% } else { %>
+                <% user.activity.forEach(act => { %>
+                    <p class="m-2" id="showActivity">You booked 
+                        <span class="bookName">
+                            <%= act.title %>
+                        </span>
+                        <span>
+                            (<%= moment(act.bookDate).fromNow() %>)
+                        </span>
+                    </p>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<style>
+    #showActivity .bookName {
+        font-weight: 900;
+        color: #ef4136;
+        font-style: oblique;
+        font-size: large;
+    }
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
+</style>

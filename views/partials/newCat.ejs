@@ -1,0 +1,61 @@
+<div
+  class="modal fade"
+  id="newCat"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add New Category:</h5>
+        <button
+          type="button"
+          class="btn"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/categories" method="POST" enctype="multipart/form-data" class="validationForm" novalidate>
+            <div class="form-group">
+                <label for="name">Category's name:<span class="text-danger">*</span></label>
+                <input type="text" name="category[name]" id="name" class="form-control" placeholder="Category's name..." required autofocus>
+                <div class="invalid-feedback">
+                  Please fill the field above.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="coverImageName">Category Cover<span class="text-danger">*</span></label>
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input name="image" type="file" class="custom-file-input" id="coverImageName" required>
+                        <label class="custom-file-label" for="coverImageName" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                        <div class="invalid-feedback">
+                          Please fill the field above.
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+            <div class="modal-footer">
+              <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-success">
+              </div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+            </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

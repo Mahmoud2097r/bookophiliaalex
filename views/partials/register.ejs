@@ -1,0 +1,75 @@
+<div class="modal fade" id="registerForm" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Login form:</h5>
+                <button type="button" class="btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/register" method="POST" class="validationForm" novalidate>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input autofocus id="username" name="username" type="text" class="form-control"
+                                placeholder="Username" required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="email" class="form-control"
+                                placeholder="email@ecample.com" required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="passwprd" class="form-control"
+                                placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phonNumber">Phon Number:</label>
+                            <input type="number" name="phonNumber" id="phonNumber" class="form-control"
+                                placeholder="Phon Number" required>
+                            <div class="invalid-feedback">
+                                Please fill the field above.
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <input class="btn btn-success1" type="submit" value="Rgister">
+                            </div>
+                            <button type="button" class="btn btn-danger1" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
+</style>
